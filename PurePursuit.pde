@@ -1,8 +1,9 @@
 float h, k;
-float velocity = 0.75;
-final float lookAhead = 80;
+float velocity = 0.50;
+final float lookAhead = 100;
 final float tolerance = 8.7;
 PVector robot;
+
 Point targetPoint;
 Line targetLine;
 int targetIndex;
@@ -15,16 +16,18 @@ void setup(){
   
   //logger = createWriter("angle1.csv");
   
-  robot = new PVector(30, 180);
+  robot = new PVector(00, 00);
   
   targets = new ArrayList<Point>();
+  targets.add(new Point(0, 80));
+  targets.add(new Point(60, 180));
   targets.add(new Point(0, 60));
   targets.add(new Point(200, 240));
   targets.add(new Point(240, 540));
   targets.add(new Point(400, 480));
   targets.add(new Point(600, 280));
   targets.add(new Point(700, 500));
-  //targets.add(new Point(0, 0));
+  //targets.add(new Point(0, 80));
   //targets.add(new Point(200, 300));
   //targets.add(new Point(600, 300));
   //targets.add(new Point(800, 0));
@@ -86,22 +89,22 @@ void draw() {
   float angle = atan(temp.y/temp.x);
   robot = robot.add(new PVector(velocity*cos(angle), velocity*sin(angle)));
   println(angle*180/PI);
-  ellipse(robot.x, robot.y, 10, 10);
   
   h = robot.x;
   k = robot.y;
 
   float distance = dist(robot.x, robot.y, targetPoint.getX(), targetPoint.getY());
   //println(distance);
-  line(robot.x, robot.y, x1, y1);
-  line(robot.x, robot.y, robot.x + lookAhead * cos(PI/4), robot.y + lookAhead * sin(PI/4));
-  line(robot.x, robot.y, robot.x + lookAhead * cos(3*PI/4), robot.y + lookAhead * sin(3*PI/4));
-  line(robot.x, robot.y, robot.x - lookAhead * cos(PI/4), robot.y - lookAhead * sin(PI/4));
-  line(robot.x, robot.y, robot.x - lookAhead * cos(3*PI/4), robot.y - lookAhead * sin(3*PI/4));
-  line(robot.x, robot.y, robot.x + lookAhead, robot.y);
-  line(robot.x, robot.y, robot.x, robot.y + lookAhead);
-  line(robot.x, robot.y, robot.x - lookAhead, robot.y);
-  line(robot.x, robot.y, robot.x, robot.y - lookAhead);
+  ellipse(h, k, 10, 10);
+  line(h, k, x1, y1);
+  //line(robot.x, robot.y, robot.x + lookAhead * cos(PI/4), robot.y + lookAhead * sin(PI/4));
+  //line(robot.x, robot.y, robot.x + lookAhead * cos(3*PI/4), robot.y + lookAhead * sin(3*PI/4));
+  //line(robot.x, robot.y, robot.x - lookAhead * cos(PI/4), robot.y - lookAhead * sin(PI/4));
+  //line(robot.x, robot.y, robot.x - lookAhead * cos(3*PI/4), robot.y - lookAhead * sin(3*PI/4));
+  //line(robot.x, robot.y, robot.x + lookAhead, robot.y);
+  //line(robot.x, robot.y, robot.x, robot.y + lookAhead);
+  //line(robot.x, robot.y, robot.x - lookAhead, robot.y);
+  //line(robot.x, robot.y, robot.x, robot.y - lookAhead);
   ellipse(x1, y1, 15, 15);
 
   if((distance <= lookAhead) && (targetIndex != targets.size())){
