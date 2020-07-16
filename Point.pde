@@ -1,23 +1,23 @@
 public class Point{
-  public double x,y;
-  public Point(double x, double y){
+  public float x,y;
+  public Point(float x, float y){
     this.x = x;
     this.y = y;
   }
   
   public float getX(){
-    return (float)x;
+    return x;
   }
   
   public float getY(){
-    return (float)y;
+    return y;
   }  
   
-  public void setX(double x){
+  public void setX(float x){
     this.x = x;
   }
   
-  public void setY(double y){
+  public void setY(float y){
     this.y = y;
   }  
 }  
